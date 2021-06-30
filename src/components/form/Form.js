@@ -52,11 +52,21 @@ export function Form({ data, basicCryptos }) {
     //executado caso a simulação for confirmada
     //converte para float se for uma string
     const quant = ConvertToNumber(quantity);
-    const secondSelectVal = ConvertToNumber(secondSelectValue);
+    let secondSelectVal = 0;
+    if (secondSelectValue === undefined) {
+      secondSelectVal = data[0]?.lastPrice;
+    } else {
+      secondSelectVal = secondSelectValue;
+    }
+    const secondslcVal = ConvertToNumber(secondSelectVal);
     // Convertion é reponsável pelo cálculo.
-    const res = Convertion(firstSelectValue, secondSelectVal, quant);
+    let res = Convertion(firstSelectValue, secondslcVal, quant);
     // seta o resultado que será exibido no segundo input.
-    setResult(res);
+    if (isNaN(res)) {
+      setResult("Por favor, informe um número válido");
+    } else {
+      setResult(res);
+    }
     // muda o texto, começa a contagem e disativa o button e os inputs
     setConfirmationText("REFAZER SIMULAÇÃO");
     setCountStarted(true);
@@ -118,6 +128,7 @@ export function Form({ data, basicCryptos }) {
         <div className={inputsAndSelectContent}>
           <input
             name="firstInput"
+            placeholder="Digite um valor"
             onChange={(event) => setQuantity(event.target.value)}
             value={quantity}
             disabled={disabledButtons}

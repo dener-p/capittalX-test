@@ -13,7 +13,6 @@ export async function Login() {
     body: data,
   });
   const dataJson = await response.json();
-  console.log(dataJson);
   // armazenei um token no navegador somente para não ficar gerando um token
   // toda a vez que atualiza a página.
   window.localStorage.setItem("tokenCapittal", dataJson.token);

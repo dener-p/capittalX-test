@@ -38,7 +38,7 @@ export function SimpleModal(props) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Clique na % que queira usar</h2>
+      <h2 id="simple-modal-title">Seleciona a % que queira usar</h2>
       <div className={classes.buttonContainer}>
         <button
           className={classes.button}
